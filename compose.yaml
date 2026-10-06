@@ -1,0 +1,51 @@
+services:
+
+  db:
+    build:
+      context: ./db
+    image: localhost/shopease-order-db:1.0
+    container_name: shopease-db
+    environment:
+      POSTGRES_DB: orders
+      POSTGRES_USER: shopease
+      POSTGRES_PASSWORD: shopease123
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: ./app
+    image: localhost/shopease-order-api:1.0
+    container_name: shopease-api
+    environment:
+      DB_HOST: db
+      DB_NAME: orders
+      DB_USER: shopease
+      DB_PASSWORD: shopease123
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    restart: on-failure
+
+  frontend:
+    build:
+      context: ./frontend
+    image: localhost/shopease-order-frontend:1.0
+    container_name: shopease-frontend
+    expose:
+      - "8080"
+
+  gateway:
+    build:
+      context: ./nginx
+    image: localhost/shopease-gateway:1.0
+    container_name: shopease-gateway
+    environment:
+      API_HOST: api
+      FRONTEND_HOST: frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+      - frontend
