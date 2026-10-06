@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase Order Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>ShopEase</h1>
+        <p>Order Management Dashboard</p>
+    </header>
+
+    <main>
+
+        <section class="status-section">
+            <div class="status-card">
+                <span class="status-dot"></span>
+                <div>
+                    <strong>API Status</strong>
+                    <p id="api-status">Checking...</p>
+                </div>
+            </div>
+
+            <div class="status-card">
+                <span class="status-dot"></span>
+                <div>
+                    <strong>Database</strong>
+                    <p id="db-status">Checking...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <h3>Total Orders</h3>
+                <p id="total-orders">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Placed</h3>
+                <p id="placed-orders">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Shipped</h3>
+                <p id="shipped-orders">0</p>
+            </div>
+
+            <div class="stat-card">
+                <h3>Delivered</h3>
+                <p id="delivered-orders">0</p>
+            </div>
+        </section>
+
+        <section class="orders-section">
+
+            <div class="section-header">
+                <h2>Orders</h2>
+                <button onclick="loadOrders()">Refresh Orders</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody id="orders-table">
+                    <tr>
+                        <td colspan="5">Loading orders...</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>ShopEase Order Service | Podman + Flask + PostgreSQL + Nginx</p>
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
